@@ -14,19 +14,43 @@
   "userData": [
     {
       "id": 1,
-      "passwords": {
-        "facebook": "test123",
-        "instagram": "test123",
-        "twitter": "test123"
-      }
+      "passwords": [
+        {
+          "id": 1,
+          "name": "facebook",
+          "password": "password"
+        },
+        {
+          "id": 2,
+          "name": "twitter",
+          "password": "password123"
+        },
+        {
+          "id": 3,
+          "name": "instagram",
+          "password": "password12"
+        }
+      ]
     },
     {
       "id": 2,
-      "passwords": {
-        "facebook": "facebook",
-        "instagram": "instagram",
-        "twitter": "twitter"
-      }
+      "passwords": [
+        {
+          "id": 1,
+          "name": "facebook2",
+          "password": "password2"
+        },
+        {
+          "id": 2,
+          "name": "twitte2r",
+          "password": "password123"
+        },
+        {
+          "id": 3,
+          "name": "instagram2",
+          "password": "password12"
+        }
+      ]
     }
   ]
 }
