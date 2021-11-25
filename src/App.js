@@ -15,9 +15,16 @@ function App() {
           </div>
           <div className="card-body">
             <Switch>
-              <Route path="/" exact component={SignUp} />
-              <Route path="/login" exact element={<Login />} />
-              <Route path="dashboard/:username" exact element={<Dashboard />} />
+              <Route path="/login" exact>
+                <Login />
+              </Route>
+              <Route path="/signup" exact>
+                <SignUp />
+              </Route>
+
+              <Route path="/dashboard/:username" exact>
+                <Dashboard />
+              </Route>
             </Switch>
           </div>
         </div>

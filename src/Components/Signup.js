@@ -38,38 +38,42 @@ function SignUp(props) {
 
   const [state, dispatch] = useImmerReducer(ourReducer, intitialState)
 
-  useEffect(() => {
-    if (state.username.checkCount) {
-      async function checkEmail() {
-        try {
-          const response = await axios.get(`http://localhost:3000/data?username=${state.username.value}`)
-          console.log(Boolean(response.data.length))
-          if (response.data.length) {
-            dispatch({ type: "showError", value: "username already taken" })
-          } else {
-            console.log("username does not exist")
-            props.history.push(`/dashboard/${state.username.value}`)
-          }
-        } catch (e) {
-          console.log(e, "there was an error")
-        }
-      }
-      checkEmail()
-    }
-  }, [state.username.checkCount])
+  // useEffect(() => {
+  //   if (state.username.checkCount) {
+  //     async function checkEmail() {
+  //       try {
+  //         const response = await axios.get(`http://localhost:3000/data?username=${state.username.value}`)
+  //         console.log(Boolean(response.data.length))
+  //         if (response.data.length) {
+  //           dispatch({ type: "showError", value: "username already taken" })
+  //         } else {
+  //           console.log("username does not exist")
+  //           props.history.push(`/dashboard/${state.username.value}`)
+  //         }
+  //       } catch (e) {
+  //         console.log(e, "there was an error")
+  //       }
+  //     }
+  //     checkEmail()
+  //   }
+  // }, [state.username.checkCount])
 
   async function handleSubmit(e) {
     e.preventDefault()
     console.log("button clicked")
-    // console.log("email", password)
-    // try {
-    //   const response = await axios.post("http://localhost:3000/data", { email: `${email}`, password: `${password}` })
-    //   console.log(response.data)
-    // } catch (e) {
-    //   console.log(e, "there was an error")
-    // }
-    console.log("checkcount submit", state.username.checkCount)
-    dispatch({ type: "checkUsername" })
+
+    // dispatch({ type: "checkUsername" })
+
+    async function signUp() {
+      try {
+        console.log("this code ran")
+        const response = await axios.post("http://localhost:3000/data", { username: state.username.value, password: state.password.value })
+        console.log(response.data)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    signUp()
   }
 
   return (
