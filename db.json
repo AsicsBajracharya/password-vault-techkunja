@@ -1,0 +1,41 @@
+{
+  "data": [
+    {
+      "email": "test@test.com",
+      "password": "password"
+    },
+    {
+      "id": 1,
+      "email": "email",
+      "password": "password"
+    },
+    {
+      "email": "email2",
+      "password": "password",
+      "id": 2
+    },
+    {
+      "email": "test",
+      "password": "test123",
+      "id": 3
+    }
+  ],
+  "userData": [
+    {
+      "id": 1,
+      "passwords": {
+        "facebook": "test123",
+        "instagram": "test123",
+        "twitter": "test123"
+      }
+    },
+    {
+      "id": 2,
+      "passwords": {
+        "facebook": "facebook",
+        "instagram": "instagram",
+        "twitter": "twitter"
+      }
+    }
+  ]
+}

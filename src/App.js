@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useEffect } from "react"
+import "bootstrap/dist/css/bootstrap.min.css"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import SignUp from "./Components/Signup"
+import Login from "./Components/Login"
+//components
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <div className="container">
+        <div className="card">
+          <div className="card-header text-center">
+            <h3>Password Vault</h3>
+          </div>
+          <div className="card-body">
+            <Routes>
+              <Route path="/" exact element={<SignUp />} />
+              <Route path="/login" exact element={<Login />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
+    </BrowserRouter>
+  )
 }
-
-export default App;
+export default App
