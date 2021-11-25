@@ -1,21 +1,21 @@
 {
   "data": [
     {
-      "email": "test@test.com",
+      "username": "test@test.com",
       "password": "password"
     },
     {
       "id": 1,
-      "email": "email",
+      "username": "username",
       "password": "password"
     },
     {
-      "email": "email2",
+      "username": "username2",
       "password": "password",
       "id": 2
     },
     {
-      "email": "test",
+      "username": "test",
       "password": "test123",
       "id": 3
     }

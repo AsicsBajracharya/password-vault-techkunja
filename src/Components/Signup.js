@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import axios from "axios"
 import { useImmerReducer } from "use-immer"
-function SignUp() {
+function SignUp(props) {
   const intitialState = {
     username: {
       value: "",
@@ -22,11 +22,15 @@ function SignUp() {
   function ourReducer(draft, action) {
     switch (action.type) {
       case "emailImmediately":
+        draft.username.hasErrors = false
         draft.username.value = action.value
         return
-      case "usernameAfterDelay":
+      case "checkUsername":
         draft.username.checkCount++
         return
+      case "showError":
+        draft.username.hasErrors = true
+        draft.username.message = action.value
       case "passwordImmediately":
         draft.password.value = action.value
     }
@@ -34,8 +38,29 @@ function SignUp() {
 
   const [state, dispatch] = useImmerReducer(ourReducer, intitialState)
 
+  useEffect(() => {
+    if (state.username.checkCount) {
+      async function checkEmail() {
+        try {
+          const response = await axios.get(`http://localhost:3000/data?username=${state.username.value}`)
+          console.log(Boolean(response.data.length))
+          if (response.data.length) {
+            dispatch({ type: "showError", value: "username already taken" })
+          } else {
+            console.log("username does not exist")
+            props.history.push(`/dashboard/${state.username.value}`)
+          }
+        } catch (e) {
+          console.log(e, "there was an error")
+        }
+      }
+      checkEmail()
+    }
+  }, [state.username.checkCount])
+
   async function handleSubmit(e) {
     e.preventDefault()
+    console.log("button clicked")
     // console.log("email", password)
     // try {
     //   const response = await axios.post("http://localhost:3000/data", { email: `${email}`, password: `${password}` })
@@ -43,6 +68,8 @@ function SignUp() {
     // } catch (e) {
     //   console.log(e, "there was an error")
     // }
+    console.log("checkcount submit", state.username.checkCount)
+    dispatch({ type: "checkUsername" })
   }
 
   return (
@@ -54,8 +81,8 @@ function SignUp() {
               <div className="input-group-text">@</div>
             </div>
             <input onChange={(e) => dispatch({ type: "emailImmediately", value: e.target.value })} type="text" className="form-control" id="email" placeholder="Email" />
-            {state.username.hasErrors && <p className="text-danger">{state.username.message}</p>}
           </div>
+          {state.username.hasErrors && <p className="text-danger">{state.username.message}</p>}
           <div className="input-group">
             <div className="input-group-prepend">
               <div className="input-group-text">@</div>
@@ -64,7 +91,6 @@ function SignUp() {
             <div className="input-group-append">
               <div className="input-group-text">@</div>
             </div>
-            {state.username.hasErrors && <p className="text-danger">{state.username.message}</p>}
           </div>
 
           <div className="button-containern d-flex justify-content-between">
@@ -81,4 +107,4 @@ function SignUp() {
   )
 }
 
-export default SignUp
+export default withRouter(SignUp)

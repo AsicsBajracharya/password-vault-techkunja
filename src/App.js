@@ -1,8 +1,9 @@
 import React, { useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Switch, Route } from "react-router-dom"
 import SignUp from "./Components/Signup"
 import Login from "./Components/Login"
+import Dashboard from "./Components/Dashboard"
 //components
 function App() {
   return (
@@ -10,13 +11,14 @@ function App() {
       <div className="container">
         <div className="card">
           <div className="card-header text-center">
-            <h3>Password Vault</h3>
+            <h3>login Vault</h3>
           </div>
           <div className="card-body">
-            <Routes>
-              <Route path="/" exact element={<SignUp />} />
+            <Switch>
+              <Route path="/" exact component={SignUp} />
               <Route path="/login" exact element={<Login />} />
-            </Routes>
+              <Route path="dashboard/:username" exact element={<Dashboard />} />
+            </Switch>
           </div>
         </div>
       </div>
