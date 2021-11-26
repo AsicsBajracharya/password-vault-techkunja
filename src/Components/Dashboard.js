@@ -6,6 +6,9 @@ function Dashboard() {
   const [userId, setUserId] = useState("")
   const [userData, setUserData] = useState([])
   const [userDataToDisplay, setUserDataToDisplay] = useState([])
+  const [newAppName, setNewAppName] = useState("")
+  const [newAppPassword, setNewAppPassword] = useState("")
+
   const params = useParams()
 
   useEffect(() => {
@@ -51,6 +54,11 @@ function Dashboard() {
     const searchResults = userData?.filter((item) => item.name.includes(searchKeyword))
     setUserDataToDisplay(searchResults)
   }
+  async function submitPassword(e) {
+    e.preventDefault()
+    const response = await axios.put(`http://localhost:3000/userData/${userId}/passwords`, { name: newAppName, password: newAppPassword })
+    console.log(response.data)
+  }
 
   return (
     <div className="container">
@@ -58,9 +66,11 @@ function Dashboard() {
       <div className="card">
         <div className="card-header">add a password</div>
         <div className="card-body">
-          <input type="text" className="form-input" />
-          <input type="text" className="form-input" />
-          <button className="btn btn-info">submit password</button>
+          <input onChange={(e) => setNewAppName(e.target.value)} type="text" className="form-input" />
+          <input onChange={(e) => setNewAppPassword(e.target.value)} type="text" className="form-input" />
+          <button onClick={submitPassword} className="btn btn-info">
+            submit password
+          </button>
         </div>
       </div>
       <div className="input-group">

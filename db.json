@@ -37,17 +37,17 @@
       "passwords": [
         {
           "id": 1,
-          "name": "facebook2",
-          "password": "password2"
+          "name": "facebook",
+          "password": "password"
         },
         {
           "id": 2,
-          "name": "twitte2r",
+          "name": "twitter",
           "password": "password123"
         },
         {
           "id": 3,
-          "name": "instagram2",
+          "name": "instagram",
           "password": "password12"
         }
       ]
